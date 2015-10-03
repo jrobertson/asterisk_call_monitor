@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'asterisk_call_notifier'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.summary = 'This gem actively monitors Asterisk\'s CDR CSV file (using tail -f) and publishes the latest entry to a SimplePubSub messaging broker.'
   s.authors = ['James Robertson']
   s.files = Dir['lib/asterisk_call_notifier.rb']

@@ -16,7 +16,7 @@ class AsteriskCallNotifier
 
     @csv_path = csv_path
 
-    @sps = SPSPub.new(address: sps_address, port: sps_port)
+    @sps = sps_address ? SPSPub.new(address: sps_address, port: sps_port) : nil
     @sps_topic = sps_topic
 
     @command = 'tail -n 1 -f ' + csv_path
@@ -24,23 +24,32 @@ class AsteriskCallNotifier
            lastapp lastdata start answer end duration billsec disposition
                                                                amaflags astid)
   end
+  
+  def on_new_call(h)
+    
+    # custom defined
+    
+  end
 
   def start()
 
-    #FileUtils.mv @csv_path, @csv_path + '.old'
-    #File.write @csv_path, ''
     t = Time.now # using the time we can ignore existing entries
 
     IO.popen(@command).each_line do |x| 
       
-      if Time.now > t + 10 then
+      # anything after 5 seconds from start is new
+      if Time.now > t + 5 then 
+        
         raw_call_entry = x.lines.last
-        json = Hash[@headings.zip(CSV.parse(raw_call_entry).first)].to_json
-        @sps.notice @sps_topic+ ': ' + json
+        h = Hash[@headings.zip(CSV.parse(raw_call_entry).first)]
+        json = h.to_json
+        
+        @sps.notice(@sps_topic + ': ' + json) if @sps
+        on_new_call(h)
       end
     end
 
-  end
+  end  
 
 end
 
