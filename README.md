@@ -1,6 +1,6 @@
-# Introducing the Asterisk Call Monitor Gem
+# Introducing the Asterisk Call Notifier Gem
 
-    require 'asterisk_call_monitor'
+    require 'asterisk_call_notifier'
 
     AsteriskCallNotifier.new(sps_address: '192.168.4.140').start
 
