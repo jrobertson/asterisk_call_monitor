@@ -19,7 +19,7 @@ class AsteriskCallNotifier
     @sps = sps_address ? SPSPub.new(address: sps_address, port: sps_port) : nil
     @sps_topic = sps_topic
 
-    @command = 'tail -n 1 -f ' + csv_path
+    @command = 'tail -n 1 -F ' + csv_path
     @headings = %i(accountcode src dst dcontet clid channel dstchannel
            lastapp lastdata start answer end duration billsec disposition
                                                                amaflags astid)
