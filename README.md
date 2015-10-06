@@ -31,7 +31,7 @@ Note: It will monitor all new entries, meaning it can identify calls received, c
 
 Update: *3-Oct-2015 @ 13:54*
 
-# The Asterisk Call Notifier gem now features on_call_new
+# The Asterisk Call Notifier gem now features on_new_call
 
     require 'asterisk_call_notifier'
 
